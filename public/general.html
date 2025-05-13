@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Общее</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/general.css">
+    <!-- Подключаем Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Подключаем Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="weather-container">
+        <h1>Прогноз погоды</h1>
+        
+        <div class="weather-widget">
+            <div class="weather-search">
+                <input type="text" id="weatherLocation" placeholder="Введите город">
+                <button onclick="fetchWeather()">Поиск</button>
+            </div>
+            
+            <div class="weather-display">
+                <div class="weather-current">
+                    <h2 id="currentCity">Москва</h2>
+                    <div class="weather-main">
+                        <img id="weatherIcon" src="" alt="Погода">
+                        <div class="weather-temp">
+                            <span id="currentTemp">--</span>°C
+                        </div>
+                    </div>
+                    <div id="weatherDescription">--</div>
+                    <div class="weather-details">
+                        <div>Влажность: <span id="humidity">--</span>%</div>
+                        <div>Ветер: <span id="wind">--</span> м/с</div>
+                    </div>
+                </div>
+                
+                <div class="weather-forecast" id="weatherForecast">
+                    <!-- Прогноз на 5 дней будет загружен здесь -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Навигационные стрелки -->
+    <a href="plans.html" class="center-arrow left">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+    </a>
+    <a href="dashboard.html" class="center-arrow right">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+    </a>
+
+
+
+    <script src="js/general.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="auth-container">
+        <h1>Регистрация</h1>
+        <div class="auth-form">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Пароль" required>
+            <input type="password" id="confirmPassword" placeholder="Повторите пароль" required>
+            <button id="registerBtn">Зарегистрироваться</button>
+            <button id="backToLoginBtn">Назад к входу</button>
+        </div>
+        <div id="authMessage" class="auth-message"></div>
+    </div>
+
+    <!-- Подключаем скрипты -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const registerBtn = document.getElementById('registerBtn');
+            const backToLoginBtn = document.getElementById('backToLoginBtn');
+            const messageDiv = document.getElementById('authMessage');
+
+            // Обработчик регистрации
+            registerBtn.addEventListener('click', async function() {
+                const email = emailInput.value;
+                const password = passwordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+                
+                // Валидация
+                if (!email || !password || !confirmPassword) {
+                    showMessage('Заполните все поля', 'error');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    showMessage('Пароли не совпадают', 'error');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    showMessage('Пароль должен быть не менее 6 символов', 'error');
+                    return;
+                }
+
+                try {
+                    const result = await window.authModule.register(email, password);
+                    if (result.success) {
+                        showMessage('Регистрация успешна! Перенаправляем...', 'success');
+                        setTimeout(() => {
+                            window.location.href = 'index.html'; // Или 'login.html' для входа
+                        }, 1500);
+                    } else {
+                        showMessage(result.error || 'Ошибка регистрации', 'error');
+                    }
+                } catch (error) {
+                    showMessage('Ошибка: ' + error.message, 'error');
+                    console.error('Registration error:', error);
+                }
+            });
+
+            // Кнопка "Назад"
+            backToLoginBtn.addEventListener('click', function() {
+                window.location.href = 'login.html';
+            });
+
+            // Функция показа сообщений
+            function showMessage(text, type) {
+                messageDiv.textContent = text;
+                messageDiv.className = `auth-message ${type}`;
+                setTimeout(() => messageDiv.textContent = '', 5000);
+            }
+        });
+    </script>
+</body>
+</html>

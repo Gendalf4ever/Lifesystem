@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Мой Дашборд</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="grid-stack">
+            <!-- Виджеты будут добавляться сюда -->
+        </div>
+        
+        <div class="widget-toolbar">
+            <button onclick="addWidget('weather')">Погода</button>
+            <button onclick="addWidget('tasks')">Задачи</button>
+            <button onclick="addWidget('calendar')">Календарь</button>
+            <button onclick="addWidget('activity')">Активность</button>
+            <button onclick="saveLayout()">Сохранить</button>
+            <button onclick="resetLayout()">Сбросить</button>
+        </div>
+    </div>
+
+    <!-- Подключаем библиотеки для перетаскивания -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gridstack.js/7.2.3/gridstack-all.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridstack.js/7.2.3/gridstack.min.css">
+    
+   <!-- Навигационные стрелки -->
+   <a href="plans.html" class="center-arrow left">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+</a>
+<a href="index.html" class="center-arrow right">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+    </svg>
+</a>
+
+
+    <!-- Основной скрипт -->
+    <script src="js/config.js"></script>
+    <script src="js/firebase-config.js"></script> 
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

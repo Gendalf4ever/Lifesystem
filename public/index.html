@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Мой трекер активности</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <!-- Добавляем ID ко всем необходимым элементам -->
+    <div id="app-content">
+        <h1>Моя активность</h1>
+        
+        <div class="card">
+            <h3>Шаги: <span id="steps">0</span></h3>
+            <h3>Пульс: <span id="heartRate">—</span> уд/мин</h3>
+        </div>
+
+        <h2>Список дел</h2>
+        <input type="text" id="taskInput" placeholder="Добавить задачу">
+        <button id="addTaskBtn">Добавить</button>
+        <ul id="taskList"></ul>
+        
+        <!-- Навигация -->
+        <div class="navigation-arrows">
+            <a href="dashboard.html" class="center-arrow left">← Дашборд</a>
+            <a href="goals.html" class="center-arrow right">Цели →</a>
+        </div>
+    </div>
+
+    <!-- Подключаем Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+
+    <!-- Конфигурация -->
+    <script src="js/config.js"></script>
+
+    <!-- Инициализация Firebase -->
+    <script>
+        // Проверяем загрузку Firebase и CONFIG
+        if (typeof firebase === 'undefined' || typeof CONFIG === 'undefined') {
+            console.error('Firebase или CONFIG не загружены');
+            document.getElementById('app-content').innerHTML = `
+                <div class="error">
+                    <h2>Ошибка загрузки</h2>
+                    <p>Не удалось загрузить необходимые ресурсы</p>
+                    <button onclick="location.reload()">Перезагрузить</button>
+                </div>
+            `;
+        } else {
+            try {
+                // Инициализация Firebase
+                const app = firebase.initializeApp(CONFIG.FIREBASE);
+                window.auth = firebase.auth();
+                window.db = firebase.firestore();
+                console.log('Firebase инициализирован');
+            } catch (error) {
+                console.error('Ошибка Firebase:', error);
+            }
+        }
+    </script>
+
+    <!-- Подключаем скрипты -->
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Инициализация приложения -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM загружен');
+            
+            // Проверяем элементы без привязки к app-content
+            const getElement = (id) => {
+                const el = document.getElementById(id);
+                if (!el) console.error(`Элемент #${id} не найден`);
+                return el;
+            };
+    
+            const elements = {
+                taskInput: getElement('taskInput'),
+                taskList: getElement('taskList'),
+                steps: getElement('steps'),
+                heartRate: getElement('heartRate'),
+                addTaskBtn: getElement('addTaskBtn')
+            };
+    
+            // Проверяем инициализацию Firebase
+            if (!window.db) {
+                console.warn('Firestore не доступен, используется localStorage');
+            }
+    
+            // Проверяем наличие всех элементов
+            if (Object.values(elements).every(el => el !== null)) {
+                if (typeof initApp === 'function') {
+                    initApp(elements); // Передаем элементы в функцию
+                } else {
+                    console.error('Функция initApp не определена');
+                }
+            } else {
+                console.error('Не удалось инициализировать приложение');
+            }
+        });
+    </script>
+</body>
+</html>

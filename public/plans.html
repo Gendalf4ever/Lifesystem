@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои приоритеты и задачи</title>
+    <!-- Подключаем общие стили и стили страницы -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/plans.css">
+    
+    <!-- Подключаем Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+        <!-- Auth -->
+        <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Мои приоритеты</h1>
+            <button id="addPriorityBtn">+ Добавить приоритет</button>
+        </header>
+        
+        <main id="prioritiesContainer">
+            <!-- Приоритеты и задачи будут здесь -->
+        </main>
+        
+        <!-- Навигацианные стрелки -->
+        <a href="general.html" class="center-arrow right">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+        </a>
+        <a href="goals.html" class="center-arrow left">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+        </a>
+    
+    
+    <!-- Подключаем конфигурацию Firebase перед основным скриптом -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/plans.js"></script>
+    
+</body>
+</html>

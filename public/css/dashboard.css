@@ -1,0 +1,157 @@
+.dashboard-container {
+    padding: 20px;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.widget-toolbar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.widget-toolbar button {
+    margin: 0 5px;
+    padding: 8px 15px;
+    background: #1890ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.grid-stack {
+    background: #f5f5f5;
+    min-height: 80vh;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.widget {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px;
+}
+
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.widget-title {
+    margin: 0;
+    font-size: 16px;
+}
+
+.widget-close {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #999;
+}
+/* Стили для виджета погоды */
+.weather-widget {
+    background: linear-gradient(135deg, #72c2ff, #0061ff);
+    color: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.weather-current {
+    margin-bottom: 15px;
+}
+
+.weather-current h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.4em;
+}
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.weather-main img {
+    width: 60px;
+    height: 60px;
+}
+
+.weather-temp {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.weather-description {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    font-size: 0.9em;
+}
+
+.weather-forecast {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.forecast-day {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+.forecast-day img {
+    width: 30px;
+    height: 30px;
+    margin: 5px auto;
+}
+
+.forecast-temp {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* Кнопка обновления */
+.weather-refresh {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weather-refresh:hover {
+    background: rgba(255, 255, 255, 0.3);
+}

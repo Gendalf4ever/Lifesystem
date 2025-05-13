@@ -1,0 +1,224 @@
+/* Основные стили аутентификации */
+.auth-container {
+    max-width: 400px;
+    margin: 60px auto 30px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: white;
+}
+
+/* Стили формы */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.auth-form input {
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.25s ease;
+}
+
+.auth-form input:focus {
+    border-color: #1890ff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.auth-form button {
+    padding: 12px;
+    background: #1890ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.auth-form button:hover {
+    background: #40a9ff;
+    transform: translateY(-1px);
+}
+
+/* Стили кнопки выхода */
+.logout-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    padding: 8px 15px 8px 12px;
+    background: #ff4d4f;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+}
+
+.logout-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: white;
+    stroke-width: 2.5;
+}
+
+.logout-btn:hover {
+    background: #ff7875;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Сообщения */
+.auth-message {
+    margin: 15px 0 5px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.auth-message.error {
+    background: #fff2f0;
+    border: 1px solid #ffccc7;
+    color: #ff4d4f;
+}
+
+.auth-message.success {
+    background: #f6ffed;
+    border: 1px solid #b7eb8f;
+    color: #52c41a;
+}
+
+/* Дополнительные элементы */
+.auth-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.auth-links a {
+    color: #1890ff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.auth-links a:hover {
+    color: #40a9ff;
+    text-decoration: underline;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .auth-container {
+        margin: 50px 20px 30px;
+        padding: 20px;
+    }
+    
+    .logout-btn {
+        top: 10px;
+        left: 10px;
+        padding: 7px 12px 7px 10px;
+        font-size: 13px;
+    }
+    
+    .logout-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+    
+    body {
+        padding-top: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-container {
+        margin: 40px 15px;
+        padding: 18px;
+        border-radius: 10px;
+    }
+    
+    .auth-form input,
+    .auth-form button {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .auth-links {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+}
+
+#resetPasswordLink {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #1890ff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+#resetPasswordLink:hover {
+    color: #40a9ff;
+    text-decoration: underline;
+}
+
+/* Модальное окно для восстановления пароля */
+.reset-password-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset-password-content {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.reset-password-content h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.reset-password-content input {
+    width: 100%;
+    padding: 12px;
+    margin: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.reset-password-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}

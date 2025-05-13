@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Вход в систему</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="auth-container">
+        <h1>Вход в систему</h1>
+        <div class="auth-form">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Пароль" required>
+            <button id="loginBtn">Войти</button>
+            <button onclick="window.location.href='register.html'">Регистрация</button>
+            <a href="#" id="resetPasswordLink">Забыли пароль?</a>
+        </div>
+        <div id="authMessage" class="auth-message"></div>
+    </div>
+
+    <!-- Модальное окно восстановления пароля -->
+    <div id="resetPasswordModal" class="reset-password-modal">
+        <div class="reset-password-content">
+            <h3>Восстановление пароля</h3>
+            <p>Введите email, указанный при регистрации. Мы отправим вам ссылку для сброса пароля.</p>
+            <input type="email" id="resetEmail" placeholder="Ваш email">
+            <div class="reset-password-actions">
+                <button id="cancelResetBtn">Отмена</button>
+                <button id="submitResetBtn">Отправить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключаем скрипты -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const loginBtn = document.getElementById('loginBtn');
+            const resetLink = document.getElementById('resetPasswordLink');
+            const messageDiv = document.getElementById('authMessage');
+            const resetModal = document.getElementById('resetPasswordModal');
+            const resetEmailInput = document.getElementById('resetEmail');
+            const cancelResetBtn = document.getElementById('cancelResetBtn');
+            const submitResetBtn = document.getElementById('submitResetBtn');
+
+            // Обработчик входа
+            loginBtn.addEventListener('click', handleLogin);
+            
+            // Обработчик открытия модального окна восстановления
+            resetLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                resetEmailInput.value = emailInput.value; // Подставляем email если он введен
+                resetModal.style.display = 'flex';
+            });
+            
+            // Обработчик отмены восстановления
+            cancelResetBtn.addEventListener('click', function() {
+                resetModal.style.display = 'none';
+            });
+            
+            // Обработчик отправки запроса на восстановление
+            submitResetBtn.addEventListener('click', handlePasswordReset);
+            
+            // Функция входа
+            async function handleLogin() {
+                const email = emailInput.value;
+                const password = passwordInput.value;
+                
+                if (!email || !password) {
+                    showMessage('Заполните все поля', 'error');
+                    return;
+                }
+                
+                try {
+                    const result = await window.authModule.login(email, password);
+                    if (result.success) {
+                        window.location.href = 'index.html';
+                    } else {
+                        showMessage(result.error || 'Ошибка входа', 'error');
+                    }
+                } catch (error) {
+                    showMessage('Ошибка при входе: ' + error.message, 'error');
+                    console.error('Login error:', error);
+                }
+            }
+            
+            // Функция восстановления пароля
+            async function handlePasswordReset() {
+                const email = resetEmailInput.value;
+                
+                if (!email) {
+                    showMessage('Введите email для сброса пароля', 'error');
+                    return;
+                }
+                
+                try {
+                    const result = await window.authModule.resetPassword(email);
+                    if (result.success) {
+                        showMessage('Письмо для сброса пароля отправлено на ' + email, 'success');
+                        resetModal.style.display = 'none';
+                    } else {
+                        showMessage(result.error || 'Ошибка сброса пароля', 'error');
+                    }
+                } catch (error) {
+                    showMessage('Ошибка: ' + error.message, 'error');
+                }
+            }
+            
+            // Функция показа сообщений
+            function showMessage(text, type) {
+                messageDiv.textContent = text;
+                messageDiv.className = `auth-message ${type}`;
+                setTimeout(() => messageDiv.textContent = '', 5000);
+            }
+        });
+    </script>
+</body>
+</html>

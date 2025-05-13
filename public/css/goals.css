@@ -1,0 +1,130 @@
+/* Стили для целей */
+.goal-item {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.goal-info h3 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.progress-bar {
+    height: 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: #4CAF50;
+    transition: width 0.3s;
+}
+
+.goal-controls {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.goal-controls input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.chart-container {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    .goal-controls {
+        flex-direction: column;
+    }
+}
+
+/*удаление целей */
+
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.delete-btn:hover {
+    background: rgba(255, 0, 0, 0.1);
+}
+
+.delete-btn svg {
+    pointer-events: none;
+}
+
+ /* Навигационные стрелки */
+/* Общие стили для обеих стрелок */
+.center-arrow {
+    position: fixed !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .center-arrow.left {
+    left: 20px;
+    right: auto;
+  }
+  
+  .center-arrow.right {
+    right: 20px;
+    left: auto;
+  }
+  
+  .center-arrow svg {
+    width: 24px;
+    height: 24px;
+    color: #2c3e50;
+  }
+  
+  .center-arrow:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.12);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Адаптация для мобильных */
+  @media (max-width: 768px) {
+    .center-arrow {
+      width: 40px;
+      height: 40px;
+    }
+    .center-arrow.left {
+      left: 12px;
+    }
+    .center-arrow.right {
+      right: 12px;
+    }
+  }
